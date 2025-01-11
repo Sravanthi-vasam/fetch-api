@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetching api </title>
+    <style>
+        *{
+            margin: 2px 5px;
+        }
+        #container{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px ;
+        }
+        #container>div{
+            background-color:rgb(207, 210, 212);
+            padding: 5%;
+            border: 1px solid rgb(204, 203, 203);
+            border-radius: 15px;
+        }
+        h1{
+            font-family: cursive;
+            font-size: 40px;
+            text-align: center;  
+        }
+        img{
+            mix-blend-mode: multiply;
+        }
+    </style>
+</head>
+<body>
+   <br> <h1>Choose your Picks</h1><br>
+    <div id="container">
+
+    </div>
+    <script>
+      fetch("https://fakestoreapi.com/products/")
+        .then((val)=>val.json())
+        .then((data)=>{
+            console.log(data);  
+            let newdata=data.map((val)=>{
+                let parent=document.getElementById("container")
+                
+                child=document.createElement("div")
+                childa=document.createElement("div")
+                childb=document.createElement("div")
+                childc=document.createElement("div")
+                img=document.createElement("img")
+                childd=document.createElement("div")
+
+
+                childa.innerText=val.id
+                childb.innerText=val.title
+                childc.innerText=val.category
+                
+                img.innerHTML=val.image
+                img.src=val.image
+                img.style.width="100px"
+                img.style.height="100px"
+               
+                childd.innerText="price: $"+val.price
+                childd.style.fontWeight="700"
+                
+
+                child.append(childa,childb,childc,img,childd)
+                parent.appendChild(child)
+
+
+
+
+                // console.log(val.id);
+                // console.log(val.title);
+                // console.log(val.category);
+                // console.log(val.price);
+
+
+                
+            }) 
+        })
+
+    </script>
+</body>
+</html>
